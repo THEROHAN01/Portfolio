@@ -33,7 +33,7 @@ export function TerminalSection() {
   }
 
   return (
-    <section id="terminal" className="max-w-6xl mx-auto px-6 py-32">
+    <section id="terminal" className="max-w-7xl mx-auto px-8 py-32">
       <SectionHeading
         label="Interactive"
         title="Talk to the terminal."
@@ -41,44 +41,47 @@ export function TerminalSection() {
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="bg-surface border border-border rounded-xl overflow-hidden max-w-3xl"
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="bg-[#0d0d0b] border border-border-subtle rounded-lg overflow-hidden max-w-3xl shadow-[0_0_60px_rgba(212,160,71,0.03)]"
         onClick={() => inputRef.current?.focus()}
       >
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          <span className="ml-3 text-xs text-text-muted font-mono">
-            rohan@portfolio ~
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border-subtle bg-surface/30">
+          <div className="flex items-center gap-2.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/70" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/70" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]/70" />
+          </div>
+          <span className="text-[10px] text-text-muted font-mono tracking-wider uppercase">
+            rohan@portfolio
           </span>
+          <div className="w-16" />
         </div>
 
         {/* Terminal body */}
         <div
           ref={scrollRef}
-          className="p-4 font-mono text-sm h-[400px] overflow-y-auto"
+          className="p-5 font-mono text-[13px] h-[420px] overflow-y-auto leading-[1.8]"
         >
           {lines.map((line, i) => (
             <div
               key={i}
               className={`${
                 line.type === "input"
-                  ? "text-text-primary mt-3"
+                  ? "text-text-primary mt-4"
                   : "text-text-muted"
-              } ${line.content === "" ? "h-4" : ""}`}
+              } ${line.content === "" ? "h-5" : ""}`}
             >
               {line.content}
             </div>
           ))}
 
           {/* Input line */}
-          <div className="flex items-center mt-3">
-            <span className="text-accent mr-2">$</span>
+          <div className="flex items-center mt-4">
+            <span className="text-accent mr-3 select-none">$</span>
             <input
               ref={inputRef}
               type="text"
@@ -89,6 +92,7 @@ export function TerminalSection() {
               autoComplete="off"
               spellCheck={false}
             />
+            <span className="w-[7px] h-[18px] bg-accent/80 animate-pulse ml-0.5" />
           </div>
         </div>
       </motion.div>

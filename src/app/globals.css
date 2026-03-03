@@ -1,18 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #000000;
-  --color-surface: #111111;
-  --color-surface-hover: #1a1a1a;
-  --color-border: #222222;
-  --color-text-primary: #ededed;
-  --color-text-muted: #888888;
-  --color-accent: #0070f3;
-  --color-accent-hover: #0060d0;
-  --color-accent-glow: rgba(0, 112, 243, 0.15);
+  --color-bg: #0a0a08;
+  --color-surface: #131311;
+  --color-surface-hover: #1c1c18;
+  --color-border: #2a2a24;
+  --color-border-subtle: #1e1e1a;
+  --color-text-primary: #e8e4dc;
+  --color-text-muted: #7a7668;
+  --color-accent: #d4a047;
+  --color-accent-hover: #e8b350;
+  --color-accent-glow: rgba(212, 160, 71, 0.12);
+  --color-accent-dim: rgba(212, 160, 71, 0.06);
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 html {
@@ -29,10 +32,23 @@ body {
 
 ::selection {
   background-color: var(--color-accent);
-  color: white;
+  color: var(--color-bg);
 }
 
-/* Scrollbar hide utility for horizontal scroll sections */
+/* Noise texture overlay */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Scrollbar */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -41,8 +57,71 @@ body {
   display: none;
 }
 
-/* Focus styles for accessibility */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Focus styles */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* Glow border on hover */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-accent-glow), transparent 60%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Section divider */
+.section-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border) 20%, var(--color-accent-dim) 50%, var(--color-border) 80%, transparent);
+}
+
+/* Animated gradient text */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-text-primary) 0%,
+    var(--color-accent) 25%,
+    var(--color-text-primary) 50%,
+    var(--color-accent) 75%,
+    var(--color-text-primary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 8s linear infinite;
 }
