@@ -1,0 +1,105 @@
+import { TerminalCommand } from "@/types";
+
+export const terminalCommands: Record<string, TerminalCommand> = {
+  help: {
+    command: "help",
+    description: "Show available commands",
+    output: [
+      "Available commands:",
+      "",
+      "  about       — Who I am",
+      "  skills      — Technical toolkit",
+      "  projects    — Featured work",
+      "  contact     — Get in touch",
+      "  github      — Open GitHub profile",
+      "  resume      — Download resume",
+      "  clear       — Clear terminal",
+      "",
+      "  Try: sudo hire-me",
+    ],
+  },
+  about: {
+    command: "about",
+    description: "Who I am",
+    output: [
+      "Rohan Salunkhe — AI Engineer & Systems Builder",
+      "",
+      "I build systems at the intersection of AI and",
+      "scalable infrastructure. Currently an AI intern",
+      "at Kpoint Technologies, working on intelligent",
+      "document processing and multi-agent systems.",
+      "",
+      "I think in systems, ship in sprints, and believe",
+      "great engineering is invisible to the end user.",
+    ],
+  },
+  skills: {
+    command: "skills",
+    description: "Technical toolkit",
+    output: [
+      "Languages   → Python, TypeScript, Go, Rust",
+      "AI/ML       → LangChain, LangGraph, PyTorch, RAG",
+      "Backend     → FastAPI, Node.js, gRPC, Kafka",
+      "Infra       → Docker, Kubernetes, AWS, Terraform",
+      "Data        → PostgreSQL, Redis, Pinecone, TimescaleDB",
+      "Frontend    → React, Next.js, Tailwind CSS",
+    ],
+  },
+  projects: {
+    command: "projects",
+    description: "Featured work",
+    output: [
+      "01  Aether    — AI document intelligence pipeline",
+      "02  Nexus     — Real-time event processing system",
+      "03  Cortex    — Multi-agent orchestration framework",
+      "04  Sentinel  — ML-powered infrastructure monitoring",
+      "",
+      "↑ Scroll up to see detailed case studies.",
+    ],
+  },
+  contact: {
+    command: "contact",
+    description: "Get in touch",
+    output: [
+      "Email    → rohan@example.com",
+      "GitHub   → github.com/everythingoholic",
+      "LinkedIn → linkedin.com/in/rohansalunkhe",
+      "Twitter  → @everythingoholic",
+    ],
+  },
+  github: {
+    command: "github",
+    description: "Open GitHub profile",
+    output: ["Opening github.com/everythingoholic ..."],
+  },
+  resume: {
+    command: "resume",
+    description: "Download resume",
+    output: ["Downloading resume.pdf ..."],
+  },
+  "sudo hire-me": {
+    command: "sudo hire-me",
+    description: "Easter egg",
+    output: [
+      "Password: ********",
+      "",
+      "✓ Access granted.",
+      "",
+      "Deploying offer letter to your inbox...",
+      "███████████████████████████████ 100%",
+      "",
+      "Just kidding. But seriously, let's talk.",
+      "→ rohan@example.com",
+    ],
+  },
+  matrix: {
+    command: "matrix",
+    description: "Easter egg",
+    output: [
+      "Wake up, Neo...",
+      "The Matrix has you...",
+      "",
+      "Follow the white rabbit. 🐇",
+    ],
+  },
+};
